@@ -1,26 +1,47 @@
+const API_URL = "https://jsonplaceholder.typicode.com/todos";
+const todo = {
+    title: "Repasando con Sofía",
+    completed: false,
+};
 // GET REQUEST
 function getTodos() {
-  console.log("GET");
+    axios
+        .get(API_URL)
+        .then((res) => showOutput(res))
+        .catch((err) => console.error(err));
 }
 
 // POST REQUEST
 function addTodo() {
-  console.log("POST");
+    axios
+        .post(API_URL, todo)
+        .then((res) => showOutput(res))
+        .catch((err) => console.error(err));
 }
 
 // PUT/PATCH REQUEST
 function updateTodo() {
-  console.log("PUT");
+    axios
+        .put(API_URL + "/3", {
+            title: "post updated",
+            completed: true,
+        })
+        .then((res) => showOutput(res))
+        .catch((err) => console.error(err));
 }
 
 // DELETE REQUEST
 function removeTodo() {
-  console.log("DELETE");
+    axios
+        .delete(API_URL + "/3")
+        .then((res) => showOutput(res))
+        .catch((err) => console.error(err));
 }
 
+// <pre>${JSON.stringify(res.data, ["title"], 2)}</pre>
 // Show output in browser
 function showOutput(res) {
-  document.getElementById("res").innerHTML = `
+    document.getElementById("res").innerHTML = `
     <div class="card card-body mb-4">
       <h5>Status: ${res.status}</h5>
     </div>
